@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Toggle with Color Change</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            flex-direction: column;
+        }
+        .bubble-container {
+            position: relative;
+        }
+        .bubble-loader {
+            position: absolute;
+            background-color: #00aaff;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #00ff3e, #00aaff); /* Default gradient */
+            border-radius: 50%;
+            animation: morph 2s infinite ease-in-out, circular 10s infinite linear;
+            display: none; /* Initially hidden */
+        }
+        @keyframes morph {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+        }
+        @keyframes circular {
+            0% {
+                transform: rotate(0deg) translateX(150px) rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg) translateX(150px) rotate(-360deg);
+            }
+        }
+        button {
+            /* padding: 10px 20px; */
+            background-color: #00aaff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button id="toggle-bubbles">Toggle Bubbles</button>
+    <button id="change-color">Change Color</button>
+    
+    <div class="bubble-container">
+        <!-- Create 10 bubble loaders -->
+        <div class="bubble-loader"></div>
+        <div class="bubble-loader"></div>
+        <div class="bubble-loader"></div>
+        <div class="bubble-loader"></div>
+        <div class="bubble-loader"></div>
+        <div class="bubble-loader"></div>
+        <div class="bubble-loader"></div>
+        <div class="bubble-loader"></div>
+        <div class="bubble-loader"></div>
+        <div class="bubble-loader"></div>
+    </div>
+
+    <script>
+        const toggleButton = document.getElementById('toggle-bubbles');
+        const changeColorButton = document.getElementById('change-color');
+        const bubbleLoaders = document.querySelectorAll('.bubble-loader');
+
+        let bubblesVisible = false;
+        let colorChanged = false;
+
+        toggleButton.addEventListener('click', () => {
+            bubblesVisible = !bubblesVisible;
+            bubbleLoaders.forEach((bubble, index) => {
+                if (bubblesVisible) {
+                    bubble.style.display = 'block';
+                    bubble.style.animationDelay = `${index * 0.5}s`;
+                } else {
+                    bubble.style.display = 'none';
+                }
+            });
+
+            toggleButton.textContent = bubblesVisible ? 'Turn Off Bubbles' : 'Turn On Bubbles';
+        });
+
+        changeColorButton.addEventListener('click', () => {
+            colorChanged = !colorChanged;
+            bubbleLoaders.forEach((bubble, index) => {
+                bubble.style.background = colorChanged ? `linear-gradient(45deg, #ff00a8, #00ffcc)` : `linear-gradient(45deg, #00ff3e, #00aaff)`;
+            });
+
+            changeColorButton.textContent = colorChanged ? 'Restore Color' : 'Change Color';
+        });
+    </script>
+</body>
+</html>

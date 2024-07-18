@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Circular Animation with Toggle</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            flex-direction: column;
+        }
+        .bubble-loader {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #00ff3e, #00aaff);
+            border-radius: 50%;
+            animation: morph 2s infinite ease-in-out, circular 10s infinite linear;
+        }
+        @keyframes morph {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+        }
+        @keyframes circular {
+            0% {
+                transform: rotate(0deg) translateX(150px) rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg) translateX(150px) rotate(-360deg);
+            }
+        }
+        button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #00aaff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <button id="toggle-animation">Pause Animation</button>
+    
+    <div class="bubble-container">
+        <div class="bubble-loader" style="animation-delay: 0s;"></div>
+        <div class="bubble-loader" style="animation-delay: 2.5s;"></div>
+        <div class="bubble-loader" style="animation-delay: 5s;"></div>
+        <div class="bubble-loader" style="animation-delay: 7.5s;"></div>
+    </div>
+
+    <script>
+        const button = document.getElementById('toggle-animation');
+        let animationPaused = false;
+
+        button.addEventListener('click', () => {
+            animationPaused = !animationPaused;
+            document.querySelectorAll('.bubble-loader').forEach(bubble => {
+                if (animationPaused) {
+                    bubble.style.animationPlayState = 'paused';
+                } else {
+                    bubble.style.animationPlayState = 'running';
+                }
+            });
+            button.textContent = animationPaused ? 'Resume Animation' : 'Pause Animation';
+        });
+    </script>
+</body>
+</html>

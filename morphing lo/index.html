@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoRPHING LOADER</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+        .morphing-loader {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff3e00, #4caf50);
+            animation: morph 2s infinite ease-in-out;
+        }
+        @keyframes morph {
+            0%, 100% {
+                border-radius: 50%;
+            }
+            25% {
+                border-radius: 0%;
+            }
+            50% {
+                border-radius: 50% 0 50% 0;
+            }
+            75% {
+                border-radius: 0 50% 0 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="morphing-loader"></div> 
+</body>
+</html>
